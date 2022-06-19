@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from 'react';
+import { FaRegStar,FaStar } from 'react-icons/fa';
+
+const Reviews = () => {
+    const[reviews,setReviews] = useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/reviews`)
+        .then(res=>res.json())
+        .then(data=>setReviews(data))
+    },[])
+
+    return (
+        <div className="my-5">
+            <h1 className="mb-5 text-2xl font-bold">See What Client's Have To Say</h1>
+        <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-5">
+        {
+            reviews.map((card,id)=>(
+                <div className="card w-96 bg-base-100 shadow-2xl" key={id}>
+<figure className="px-10 pt-10">
+<img src={card.img} alt="" />
+</figure>
+<div className="card-body items-center text-center">
+<h2 className="card-title">{card.name}</h2>
+<div className="flex">
+<h2 className='font-bold text-lg'>Rating: </h2>
+<FaStar className="mx-2 " style={{color: 'yellow'}}></FaStar> {card.rating}
+</div>
+<p>{card.comment}</p> 
+<div className="card-actions">
+</div>
+</div>
+</div>
+            ))
+        }
+    </div>
+   </div>    
+    );
+};
+
+export default Reviews;
