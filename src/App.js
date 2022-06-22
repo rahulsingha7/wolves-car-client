@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './Pages/Context/AuthProvider/AuthProvider';
 import AddProduct from './Pages/Dashboard/Admin/AddProduct/AddProduct';
+import MakeAdmin from './Pages/Dashboard/Admin/MakeAdmin/MakeAdmin';
+import ManageAllOrder from './Pages/Dashboard/Admin/ManageAllOrder/ManageAllOrder';
 import ManageProducts from './Pages/Dashboard/Admin/ManageProducts/ManageProducts';
 import UpdateProduct from './Pages/Dashboard/Admin/UpdateProduct/UpdateProduct';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
@@ -10,6 +12,7 @@ import Payment from './Pages/Dashboard/Payment/Payment';
 import Review from './Pages/Dashboard/Review/Review';
 import Explore from './Pages/Explore/Explore';
 import Home from './Pages/Home/Home/Home';
+import AdminRoute from './Pages/Login/Login/AdminRoute/AdminRoute';
 import Login from './Pages/Login/Login/Login';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Register from './Pages/Login/Register/Register';
@@ -33,12 +36,14 @@ function App() {
       <Route path="/explore" element={<Explore></Explore>} />
       <Route path="/purchase/:productId" element={<PrivateRoute><Purchase></Purchase></PrivateRoute>}/>
       <Route path="/dashboard" element={<PrivateRoute><Dashboard></Dashboard></PrivateRoute>} />
-      <Route path="/dashboard/payment" element={<Payment></Payment>} />
-      <Route path="/dashboard/addProduct" element={<AddProduct></AddProduct>} />
-      <Route path="/dashboard/manageProduct" element={<ManageProducts></ManageProducts>} />
+      <Route path="/dashboard/addProduct" element={<AdminRoute><AddProduct></AddProduct></AdminRoute>} />
+      <Route path="/dashboard/manageProduct" element={<AdminRoute><ManageProducts></ManageProducts></AdminRoute>} />
       <Route path="/dashboard/review" element={<Review></Review>} />
       <Route path="/dashboard/myOrder" element={<MyOrder></MyOrder>} />
-      <Route path="/dashboard/manageProduct/:id" element={<UpdateProduct></UpdateProduct>} />
+      <Route path="/dashboard/payment/:orderId" element={<Payment></Payment>} />
+      <Route path="/dashboard/makeAdmin" element={<AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>} />
+      <Route path="/dashboard/manageAllOrder" element={<AdminRoute><ManageAllOrder></ManageAllOrder></AdminRoute>} />
+      <Route path="/dashboard/manageProduct/:id" element={<AdminRoute><UpdateProduct></UpdateProduct></AdminRoute>} />
       <Route path="*" element={<NotFound></NotFound>} />
     </Routes>
     <Footer></Footer>

@@ -1,19 +1,20 @@
 import React, { useRef,useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import Dashboard from '../Dashboard/Dashboard';
-import noProfile from '../../../images/User/download-removebg-preview.png'
 const Review = () => {
     const {user} = useAuth();
     const [error,setError] = useState('');
   
     const nameRef = useRef();
+    const emailRef = useRef();
   const commentRef = useRef();
   const ratingRef = useRef();
   const handleAddReview = (e) =>{
     const name = nameRef.current.value;
+    const email = emailRef.current.value;
     const comment = commentRef.current.value;
     const rating = ratingRef.current.value;
-    const img = user?.photoURL || noProfile;
+    const img = user?.photoURL;
     if(rating>5){
       setError('Rating can not be more than 5');
       e.preventDefault();
@@ -23,9 +24,9 @@ const Review = () => {
       e.preventDefault();
     }
     else{
-      const addRating = {name,comment,rating,img};
+      const addRating = {name,email,comment,rating,img};
       console.log(addRating);
-      fetch(`http://localhost:5000/reviews`,{
+      fetch(`https://protected-brook-65806.herokuapp.com/reviews`,{
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -54,7 +55,10 @@ const Review = () => {
         <form onSubmit={handleAddReview}>
             <h1 className='mb-4 font-bold text-xl'>Add Review</h1>
           <div className="mb-4">
-              <input ref={nameRef} value={user?.displayName||user?.email} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="name" required/>
+              <input ref={nameRef} value={user?.displayName} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="name" required/>
+            </div>
+          <div className="mb-4">
+              <input ref={emailRef} value={user?.email} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="name" required/>
             </div>
          
           <div className="mb-4">

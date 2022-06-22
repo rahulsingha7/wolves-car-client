@@ -7,24 +7,28 @@ const Purchase = () => {
     const {productId} = useParams();
     const [product,setAllProduct] = useState({});
     useEffect(()=>{
-       fetch(`http://localhost:5000/products/${productId}`)
+       fetch(`https://protected-brook-65806.herokuapp.com/products/${productId}`)
        .then(res=>res.json())
        .then(data=>setAllProduct(data))
     },[]);
     const productRef =useRef();
-    const userRef = useRef();
+    const nameRef = useRef();
+    const emailRef = useRef();
     const addressRef = useRef();
+    const phoneRef = useRef();
     const dateRef = useRef();
     const priceRef = useRef();
     const handlePurchase = e =>{
         const product = productRef.current.value;
-        const user = userRef.current.value;
+        const name = nameRef.current.value;
+        const email = emailRef.current.value;
         const address = addressRef.current.value;
+        const phone = phoneRef.current.value;
         const date = dateRef.current.value;
         const price = priceRef.current.value;
-        const order = {product,user,address,date,price}
+        const order = {product,name,email,address,phone,date,price}
         order.status = "pending";
-        fetch(`http://localhost:5000/orders`,{
+        fetch(`https://protected-brook-65806.herokuapp.com/orders`,{
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -44,12 +48,12 @@ const Purchase = () => {
     return (
         <div>
   <div  className="grid md:grid-cols-2 gap-4">
-  <div class="card w-100 bg-base-100 shadow-xl">
-  <figure class="px-8 pt-6">
+  <div className="card w-100 bg-base-100 shadow-xl">
+  <figure className="px-8 pt-6">
     <img src={product?.img} alt="" />
   </figure>
-  <div class="card-body items-center text-center">
-    <h2 class="card-title">Name: {product?.name}</h2>
+  <div className="card-body items-center text-center">
+    <h2 className="card-title">Name: {product?.name}</h2>
     <h5><span className="font-bold">Description:</span> {product?.description}</h5>
     <h1 className="text-2xl font-bold">Price: ${product?.price}</h1>
   </div>
@@ -61,12 +65,18 @@ const Purchase = () => {
               <input ref={productRef} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="productName" value={product?.name} required/>
             </div>
           <div className="mb-4">
-              <input ref={userRef} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="name" value={user?.email} required/>
+              <input ref={nameRef} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="name" value={user?.displayName} required/>
+            </div>
+          <div className="mb-4">
+              <input ref={emailRef} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="email" value={user?.email} required/>
             </div>
          
          
             <div className="mb-4">
               <textarea ref={addressRef} type="text" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="address" required/>
+            </div>
+            <div className="mb-4">
+              <input ref={phoneRef} type="number" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="phone number" required/>
             </div>
           <div className="mb-4">
               <input ref={dateRef}  type="date" className="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="date" required/>

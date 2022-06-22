@@ -6,7 +6,7 @@ const UpdateProduct = () => {
     const {id} = useParams();
     const [product,setProduct] = useState({});
     useEffect(()=>{
-        const url = `http://localhost:5000/products/${id}`
+        const url = `https://protected-brook-65806.herokuapp.com/products/${id}`
         fetch(url)
         .then(res=>res.json())
         .then(data=>setProduct(data))
@@ -32,7 +32,7 @@ const UpdateProduct = () => {
         setProduct(updatedProduct);
     }
     const handleUpdateProduct = e=>{
-        const url = `http://localhost:5000/products/${id}`
+        const url = `https://protected-brook-65806.herokuapp.com/products/${id}`
         fetch(url,{
             method: 'PUT',
             headers:{

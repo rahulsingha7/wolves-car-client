@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 
 const Dashboard = () => {
-    const {logOut} = useAuth();
+    const {logOut,admin} = useAuth();
     return (
         <div>
             <div class="drawer drawer-mobile">
@@ -17,12 +17,23 @@ const Dashboard = () => {
     <label for="my-drawer-2" class="drawer-overlay"></label> 
     <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content bg-blue-800 text-white my-2">
       <li> <NavLink to="/home">Home</NavLink></li>
-      <li> <NavLink to="/dashboard/payment">Pay</NavLink></li>
-      <li> <NavLink to="/dashboard/addProduct">Add Products</NavLink></li>
+   
+      {
+        admin? <div>
+              <li> <NavLink to="/dashboard/addProduct">Add Products</NavLink></li>
       <li> <NavLink to="/dashboard/manageProduct">Manage Products</NavLink></li>
-      <li> <NavLink to="/dashboard/myOrder">My Orders</NavLink></li>
-      <li> <NavLink to="/dashboard/review">Review</NavLink></li>
-     <button onClick={logOut} className='btn bg-blue-800'>LogOut</button>
+      <li> <NavLink to="/dashboard/manageAllOrder">Manage All Order</NavLink></li>
+      <li> <NavLink to="/dashboard/makeAdmin">Make Admin</NavLink></li>
+        </div> :
+         <div>
+           <li> <NavLink to="/dashboard/myOrder">My Orders</NavLink></li>   
+         <li> <NavLink to="/dashboard/review">Review</NavLink></li>
+         </div>
+      }
+     
+    <Link to="/login">
+    <button onClick={logOut} className='btn bg-blue-800'>LogOut</button>
+    </Link>
     </ul>
   
   </div>

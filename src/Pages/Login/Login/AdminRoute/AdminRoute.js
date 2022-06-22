@@ -1,9 +1,9 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import useAuth from '../../Hooks/useAuth';
+import useAuth from '../../../Hooks/useAuth';
 
-const PrivateRoute = ({children,...rest}) => {
-    const {user,isLoading} = useAuth();
+const AdminRoute = ({children,...rest}) => {
+    const {user,admin,isLoading} = useAuth();
     let location = useLocation();
    if(isLoading)
    {
@@ -12,7 +12,7 @@ const PrivateRoute = ({children,...rest}) => {
        </div>
      </div> 
    }
-   if(user.email){
+   if(user.email && admin){
        return children;
    }
    else{
@@ -20,4 +20,4 @@ const PrivateRoute = ({children,...rest}) => {
    }
 };
 
-export default PrivateRoute;
+export default AdminRoute;

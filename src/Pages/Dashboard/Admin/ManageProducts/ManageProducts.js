@@ -5,14 +5,14 @@ import Dashboard from '../../Dashboard/Dashboard';
 const ManageProducts = () => {
     const [manageProducts,setManageProducts] = useState();
     useEffect(()=>{
-        fetch(`http://localhost:5000/products`)
+        fetch(`https://protected-brook-65806.herokuapp.com/products`)
         .then(res=>res.json())
         .then(data=>setManageProducts(data))
     },[])
     const handleDeleteProduct = id =>{
         const proceed = window.confirm('Are you sure?');
         if(proceed){
-            const url = `http://localhost:5000/products/${id}`
+            const url = `https://protected-brook-65806.herokuapp.com/products/${id}`
             fetch(url,{
                 method: 'DELETE'
             })

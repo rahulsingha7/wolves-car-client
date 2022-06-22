@@ -13,7 +13,7 @@ const AddProduct = () => {
     const img = imgRef.current.value;
     const addProduct = {name,description,price,img};
     console.log(addProduct);
-    fetch(`http://localhost:5000/products`,{
+    fetch(`https://protected-brook-65806.herokuapp.com/products`,{
       method: 'POST',
       headers: {
         'content-type': 'application/json'

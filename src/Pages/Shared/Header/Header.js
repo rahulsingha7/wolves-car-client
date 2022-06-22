@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
    }
         {
      user?.email?
-     <button onClick={logOut} className='btn bg-blue-800'>LogOut</button>
+    <Link to="/login"> <button onClick={logOut} className='btn bg-blue-800'>LogOut</button></Link>
      :
        <NavLink className="my-3" to="/login">Login</NavLink>
    }
@@ -39,7 +39,7 @@ const Header = () => {
    }
    {
      user?.email?
-     <button onClick={logOut} className='btn bg-blue-800'>LogOut</button>
+     <Link to="/login"> <button onClick={logOut} className='btn bg-blue-800'>LogOut</button></Link>
      :
        <NavLink className="my-3" to="/login">Login</NavLink>
    }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Products = () => {
     const [products,setProducts] = useState([]);
     useEffect(()=>{
-       fetch(`http://localhost:5000/products`)
+       fetch(`https://protected-brook-65806.herokuapp.com/products`)
        .then(res=>res.json())
        .then(data=>setProducts(data))
     },[])
@@ -15,7 +15,7 @@ const Products = () => {
                 products.slice(0,6).map((card,id)=>(
                     <div className="card w-100 bg-base-100 shadow-xl" key={id}>
   <figure className="px-10 pt-10">
-    <img src={card.img} alt="" className="rounded-xl" />
+    <img src={card.img} alt="" className="rounded-xl scale-75 hover:scale-100 ease-in duration-200" />
   </figure>
   <div className="card-body items-center text-center">
     <h2 className="card-title">{card.name}</h2>
