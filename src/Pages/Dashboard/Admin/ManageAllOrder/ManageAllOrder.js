@@ -83,6 +83,7 @@ const ManageAllOrder = () => {
                  <select value={orders?.status} onChange={handleChange} className='form-control' name="status"> 
                      <option>Pending</option>
                      <option>Shipped</option>
+                     <option>Rejected</option>
                  </select></td>
                 {
                     showStatus && <td><button className="btn bg-yellow-500" onClick={()=>handleStatus(orders._id)}>Update</button>
