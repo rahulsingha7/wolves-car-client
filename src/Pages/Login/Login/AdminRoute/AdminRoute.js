@@ -5,7 +5,7 @@ import useAuth from '../../../Hooks/useAuth';
 const AdminRoute = ({children,...rest}) => {
     const {user,admin,isLoading} = useAuth();
     let location = useLocation();
-   if(isLoading)
+   if(!admin || isLoading)
    {
        return  <div className="flex justify-center items-center">
        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">

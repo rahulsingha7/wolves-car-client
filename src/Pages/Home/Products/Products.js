@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 
 const Products = () => {
+
     const [products,setProducts] = useState([]);
     useEffect(()=>{
        fetch(`https://protected-brook-65806.herokuapp.com/products`)

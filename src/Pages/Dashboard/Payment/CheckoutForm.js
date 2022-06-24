@@ -104,8 +104,8 @@ const CheckoutForm = ({order}) => {
         }}
       />
      {
-         process  ? <div class="flex justify-center items-center">
-         <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+         process  ? <div className="flex justify-center items-center">
+         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
          </div>
        </div> :  <button className="btn bg-blue-800 text-white" type="submit" disabled={!stripe || success}>
          Pay ${price}

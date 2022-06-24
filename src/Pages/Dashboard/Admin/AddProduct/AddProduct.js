@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
-import Dashboard from '../../Dashboard/Dashboard';
+import DashboardHome from '../../DashboardHome/DashboardHome';
+
+
 
 const AddProduct = () => {
   const nameRef = useRef();
@@ -32,7 +34,7 @@ const AddProduct = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+          <DashboardHome></DashboardHome>
         </div>
         <div className="mx-auto my-auto">
         <div className="w-full max-w-xs">

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-import Dashboard from '../Dashboard/Dashboard';
+import DashboardHome from '../DashboardHome/DashboardHome';
+
 
 const MyOrder = () => {
     const{user} = useAuth();
@@ -31,7 +32,7 @@ const MyOrder = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+           <DashboardHome></DashboardHome>
         </div>
         <div className="overflow-x-auto">
   <table className="table">

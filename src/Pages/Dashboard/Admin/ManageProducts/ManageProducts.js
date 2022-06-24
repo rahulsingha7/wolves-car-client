@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Dashboard from '../../Dashboard/Dashboard';
+import DashboardHome from '../../DashboardHome/DashboardHome';
 
 const ManageProducts = () => {
     const [manageProducts,setManageProducts] = useState();
@@ -30,7 +30,7 @@ const ManageProducts = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+           <DashboardHome></DashboardHome>
         </div>
         <div class="overflow-x-auto">
   <table class="table-fixed">

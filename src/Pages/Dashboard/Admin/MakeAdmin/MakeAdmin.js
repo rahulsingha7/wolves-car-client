@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
-import Dashboard from '../../Dashboard/Dashboard';
+import DashboardHome from '../../DashboardHome/DashboardHome';
 
 const MakeAdmin = () => {
   const [email,setEmail] = useState('');
@@ -31,7 +31,7 @@ const MakeAdmin = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+           <DashboardHome></DashboardHome>
         </div>
         <div className="mx-auto my-auto">
         <div className="w-full max-w-xs">

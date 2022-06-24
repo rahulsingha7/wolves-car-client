@@ -1,6 +1,7 @@
 import React, { useRef,useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
-import Dashboard from '../Dashboard/Dashboard';
+import DashboardHome from '../DashboardHome/DashboardHome';
+
 const Review = () => {
     const {user} = useAuth();
     const [error,setError] = useState('');
@@ -48,7 +49,7 @@ const Review = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+           <DashboardHome></DashboardHome>
         </div>
         <div className="mx-auto my-auto">
         <div className="w-full max-w-xs">

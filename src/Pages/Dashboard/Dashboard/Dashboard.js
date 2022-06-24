@@ -1,44 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
+import Chart from '../Admin/Chart/Chart';
+import DashboardHome from '../DashboardHome/DashboardHome';
+
 
 const Dashboard = () => {
-    const {logOut,admin} = useAuth();
+   const{user,admin} = useAuth();
+    const [orders,setOrders] = useState([]);
+    useEffect(()=>{
+        fetch(`https://protected-brook-65806.herokuapp.com/myOrder/${user?.email}`)
+        .then(res=>res.json())
+        .then(data=>setOrders(data));
+    },[user])
+    const handleCancelOrder = id =>{
+        const proceed = window.confirm('Are you sure?');
+        if(proceed){
+            const url = `https://protected-brook-65806.herokuapp.com/orders/${id}`;
+            fetch(url,{
+                method: 'DELETE'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.deletedCount>0){
+                    alert('Order Cancelled');
+                    const remainingOrders = orders.filter(order=>order._id!==id)
+                    setOrders(remainingOrders);
+                }
+            })
+        }
+    }
     return (
-        <div>
-            <div class="drawer drawer-mobile">
-  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col items-center justify-center">
-    
-    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-  
-  </div> 
-  <div class="drawer-side">
-    <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content bg-blue-800 text-white my-2">
-      <li> <NavLink to="/home">Home</NavLink></li>
-   
-      {
-        admin? <div>
-              <li> <NavLink to="/dashboard/addProduct">Add Products</NavLink></li>
-      <li> <NavLink to="/dashboard/manageProduct">Manage Products</NavLink></li>
-      <li> <NavLink to="/dashboard/manageAllOrder">Manage All Order</NavLink></li>
-      <li> <NavLink to="/dashboard/makeAdmin">Make Admin</NavLink></li>
-        </div> :
-         <div>
-           <li> <NavLink to="/dashboard/myOrder">My Orders</NavLink></li>   
-         <li> <NavLink to="/dashboard/review">Review</NavLink></li>
+      <div className="flex">
+      <div>
+         <DashboardHome></DashboardHome>
+      </div>
+         {
+           !admin &&   <div className="overflow-x-auto">
+           <table className="table">
+             <thead>
+               <tr>
+                 <th>Id</th>
+                 <th>Cusmoter Name</th>
+                 <th>Cusmoter Email</th>
+                 <th>Cusmoter Phone No.</th>
+                 <th>Product Name</th>
+                 <th>Address</th>
+                 <th>Purchase Date</th>
+                 <th>Price</th>
+                 <th>Payment</th>
+                 <th>status</th>
+                 <th>Action</th>
+               </tr>
+             </thead>
+              {
+                  orders?.map((order,index)=><tbody key={order?._id}>
+                   <tr>
+                       <td>{index+1}</td>
+                       <td>{order?.name}</td>
+                       <td>{order?.email}</td>
+                       <td>{order?.phone}</td>
+                       <td>{order?.product}</td>
+                       <td style={{height:'90px',width:'60%'}}>{order?.address}</td>
+                       <td>{order?.date}</td>
+                       <td>{order?.price}</td>
+                       <td>{order?.payment ? 'Paid' : <Link to={`/dashboard/payment/${order?._id}`}><button className='btn bg-blue-400'>Pay</button></Link>}</td>
+                       <td>{order?.status}</td>
+                       <td><button onClick={()=>handleCancelOrder(order?._id)} className="btn bg-red-600">Cancel</button></td>
+                   </tr>
+                  </tbody>)
+              }
+           </table>
          </div>
-      }
-     
-    <Link to="/login">
-    <button onClick={logOut} className='btn bg-blue-800'>LogOut</button>
-    </Link>
-    </ul>
-  
-  </div>
-</div>
-        </div>
+         }
+         {
+           admin && <div>
+                  <Chart></Chart>
+           </div>
+         }
+  </div> 
     );
 };
 

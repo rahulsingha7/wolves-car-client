@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Dashboard from '../../Dashboard/Dashboard';
+import DashboardHome from '../../DashboardHome/DashboardHome';
+
 
 const UpdateProduct = () => {
     const {id} = useParams();
@@ -54,7 +55,7 @@ const UpdateProduct = () => {
     return (
         <div className="flex">
         <div>
-            <Dashboard></Dashboard>
+           <DashboardHome></DashboardHome>
         </div>
         <div className="mx-auto my-auto">
         <div className="w-full max-w-xs">
